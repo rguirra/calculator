@@ -1,0 +1,36 @@
+<form name="form">
+  <!-- calculadora -->
+  <div class="calc">
+    <h4>Operação:</h4>
+    <select formControlName="operacao">
+      <option *ngFor="let operacao of operacoes" [value]="operacao.id">
+        {{ operacao.nome }}
+      </option>
+    </select>
+    <label>Primeiro Número:</label>
+    <input formControlName="num1" type="number" />
+    <label>Segundo Número:</label>
+    <input formControlName="num2" type="number" />
+    <calculadora-dumb [resultado]="resultado"></calculadora-dumb>
+    <button (click)="calcular()">Resultado</button>
+  </div>
+  <!-- Conversor de temperatura -->
+  <div class="temperatura">
+    <h4>Conversor de Temperatura</h4>
+    <select [(ngModel)]="selectFrom">
+      <option *ngFor="let temp of temperatura" [value]="temp.id">
+        {{ temp.nome }}
+      </option>
+    </select>
+    <p>Para</p>
+    <select [(ngModel)]="selectTo">
+      <option *ngFor="let temp of temperatura" [value]="temp.id">
+        {{ temp.nome }}
+      </option>
+    </select>
+    <p>Valor: <input [(ngModel)]="valor" /></p>
+    <calculadora-dumb [resultado]="resultado"></calculadora-dumb>
+    <button (click)="converterTemperatura()">Converter Temperatura</button>
+  </div>
+  <button (click)="clearAll()">Limpar Tudo</button>
+</form>
