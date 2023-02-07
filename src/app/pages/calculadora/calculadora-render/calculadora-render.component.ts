@@ -1,24 +1,30 @@
-import { ChangeDetectionStrategy, Component, Injectable, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'calculadora-render',
   templateUrl: './calculadora-render.component.html',
-  styleUrls: ['./calculadora-render.component.scss'],
   providers: [FormBuilder],
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-
-@Injectable({
-  providedIn: 'root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculadoraRenderComponent {
 
-  form: FormGroup;
-  resultado = 0;
-  selectFrom = 1;
-  selectTo = 3;
-  valor = 0;
+  calculadora = [
+    {
+      id: 1,
+      nome: 'Simples',
+    },
+    {
+      id: 2,
+      nome: 'Temperatura',
+    },
+  ];
+
   operacoes = [
     {
       id: 1,
@@ -53,57 +59,106 @@ export class CalculadoraRenderComponent {
     },
   ];
 
-  constructor(public formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      operacao: [null, Validators.required],
-      num1: [null, [Validators.required, Validators.max(100)]],
-      num2: [null, [Validators.required, Validators.max(100)]],
-      selectFrom: [null, Validators.required],
-      selectTo: [null, Validators.required],
-    });
-  }
+  selectCalc = this.calculadora[0];
+  operacao: any;
+  selectFrom: any;
+  selectTo: any;
+  num1 = 0;
+  num2 = 0;
+
+  constructor() {}
 
   calcular() {
-    const num1 = this.form.get('num1')?.value;
-    const num2 = this.form.get('num2')?.value;
-    const operacao = this.form.get('operacao')?.value;
-
-    switch (operacao) {
-      case 1:
-        this.resultado = num1 + num2;
-        break;
-      case 2:
-        this.resultado = num1 - num2;
-        break;
-      case 3:
-        this.resultado = num1 * num2;
-        break;
-      case 4:
-        this.resultado = num1 / num2;
-        break;
-      default:
-        break;
+    let result;
+    if (this.selectCalc.id === 1) {
+      switch (this.operacao.id) {
+        case 1:
+          result = this.num1 + this.num2;
+          break;
+        case 2:
+          result = this.num1 - this.num2;
+          break;
+        case 3:
+          result = this.num1 * this.num2;
+          break;
+        case 4:
+          result = this.num1 / this.num2;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectFrom.id) {
+        case 1:
+          switch (this.selectTo.id) {
+            case 2:
+              result = (this.num1 * 9) / 5 + 32;
+              break;
+            case 3:
+              result = this.num1 + 273.15;
+              break;
+          }
+          break;
+        case 2:
+          switch (this.selectTo.id) {
+            case 1:
+              result = ((this.num1 - 32) * 5) / 9;
+              break;
+            case 3:
+              result = ((this.num1 - 32) * 5) / 9 + 273.15;
+              break;
+          }
+          break;
+      }
     }
   }
 
-  converterTemperatura() {
-    if (this.selectFrom === 1 && this.selectTo === 2) {
-      this.resultado = (this.valor * 9/5) + 32;
-    } else if (this.selectFrom === 1 && this.selectTo === 3) {
-      this.resultado = this.valor + 273.15;
-    } else if (this.selectFrom === 2 && this.selectTo === 1) {
-      this.resultado = (this.valor - 32) * 5/9;
-    } else if (this.selectFrom === 2 && this.selectTo === 3) {
-      this.resultado = (this.valor - 32) * 5/9 + 273.15;
-    } else if (this.selectFrom === 3 && this.selectTo === 1) {
-      this.resultado = this.valor - 273.15;
-    } else if (this.selectFrom === 3 && this.selectTo === 2) {
-      this.resultado = (this.valor - 273.15) * 9/5 + 32;
-    }
-  }
+  // calcularos(): void {
+  //   let resultTempCalc: number | undefined;
+  //   switch (this.operacao) {
+  //     case 1:
+  //       resultTempCalc = this.num1 + this.num2;
+  //       break;
+  //     case 2:
+  //       resultTempCalc = this.num1 - this.num2;
+  //       break;
+  //     case 3:
+  //       resultTempCalc = this.num1 * this.num2;
+  //       break;
+  //     case 4:
+  //       resultTempCalc = this.num1 / this.num2;
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.resultTempadoCalc.emit(resultTempCalc);
+  // }
+
+  // converterTemperatura(): void {
+  //   let resultTemp: number | undefined;
+  //   if (this.selectFrom === 1 && this.selectTo === 2) {
+  //     resultTemp = (this.valor * 9) / 5 + 32;
+  //   } else if (this.selectFrom === 1 && this.selectTo === 3) {
+  //     resultTemp = this.valor + 273.15;
+  //   } else if (this.selectFrom === 2 && this.selectTo === 1) {
+  //     resultTemp = ((this.valor - 32) * 5) / 9;
+  //   } else if (this.selectFrom === 2 && this.selectTo === 3) {
+  //     resultTemp = ((this.valor - 32) * 5) / 9 + 273.15;
+  //   } else if (this.selectFrom === 3 && this.selectTo === 1) {
+  //     resultTemp = this.valor - 273.15;
+  //   } else if (this.selectFrom === 3 && this.selectTo === 2) {
+  //     resultTemp = ((this.valor - 273.15) * 9) / 5 + 32;
+  //   }
+  //   this.resultTempadoTemp.emit(resultTemp);
+  // }
 
   clearAll() {
-    this.form.setValue(['']);
+    this.operacao = 0;
+    this.num1 = 0;
+    this.num2 = 0;
+    this.selectFrom = 0;
+    this.selectTo = 0;
+    // this.resultTempadoCalc.emit(null);
+    // this.resultTempadoTemp.emit(null);
   }
-
 }
