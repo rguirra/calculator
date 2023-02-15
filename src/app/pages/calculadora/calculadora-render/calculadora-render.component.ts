@@ -1,20 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Output,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'calculadora-render',
   templateUrl: './calculadora-render.component.html',
-  providers: [FormBuilder],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculadoraRenderComponent {
-
-  calculadora = [
+  @Output() calculadora = [
     {
       id: 1,
       nome: 'Simples',
@@ -25,7 +21,7 @@ export class CalculadoraRenderComponent {
     },
   ];
 
-  operacoes = [
+  @Output() operacoes = [
     {
       id: 1,
       nome: 'Soma',
@@ -44,7 +40,7 @@ export class CalculadoraRenderComponent {
     },
   ];
 
-  temperatura = [
+  @Output() temperatura = [
     {
       id: 1,
       nome: 'Celsius',
@@ -113,52 +109,11 @@ export class CalculadoraRenderComponent {
     }
   }
 
-  // calcularos(): void {
-  //   let resultTempCalc: number | undefined;
-  //   switch (this.operacao) {
-  //     case 1:
-  //       resultTempCalc = this.num1 + this.num2;
-  //       break;
-  //     case 2:
-  //       resultTempCalc = this.num1 - this.num2;
-  //       break;
-  //     case 3:
-  //       resultTempCalc = this.num1 * this.num2;
-  //       break;
-  //     case 4:
-  //       resultTempCalc = this.num1 / this.num2;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   this.resultTempadoCalc.emit(resultTempCalc);
-  // }
-
-  // converterTemperatura(): void {
-  //   let resultTemp: number | undefined;
-  //   if (this.selectFrom === 1 && this.selectTo === 2) {
-  //     resultTemp = (this.valor * 9) / 5 + 32;
-  //   } else if (this.selectFrom === 1 && this.selectTo === 3) {
-  //     resultTemp = this.valor + 273.15;
-  //   } else if (this.selectFrom === 2 && this.selectTo === 1) {
-  //     resultTemp = ((this.valor - 32) * 5) / 9;
-  //   } else if (this.selectFrom === 2 && this.selectTo === 3) {
-  //     resultTemp = ((this.valor - 32) * 5) / 9 + 273.15;
-  //   } else if (this.selectFrom === 3 && this.selectTo === 1) {
-  //     resultTemp = this.valor - 273.15;
-  //   } else if (this.selectFrom === 3 && this.selectTo === 2) {
-  //     resultTemp = ((this.valor - 273.15) * 9) / 5 + 32;
-  //   }
-  //   this.resultTempadoTemp.emit(resultTemp);
-  // }
-
   clearAll() {
     this.operacao = 0;
     this.num1 = 0;
     this.num2 = 0;
     this.selectFrom = 0;
     this.selectTo = 0;
-    // this.resultTempadoCalc.emit(null);
-    // this.resultTempadoTemp.emit(null);
   }
 }

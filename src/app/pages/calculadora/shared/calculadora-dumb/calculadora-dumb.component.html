@@ -1,6 +1,6 @@
 <form name="form" [formGroup]="form">
   <select formControlName="tipoCalculadora">
-    <option *ngFor="let tipo of calculadora" [value]="tipo.id">{{ tipo.nome }}</option>
+    <option *ngFor="let calc of calculadora">{{ calculadora.nome }}</option>
   </select>
 
   <div *ngIf="calculadora === 1">
@@ -14,7 +14,7 @@
 
   <div *ngIf="calculadora === 2">
     <select id="selectFrom" formControlName="tipoConversao">
-      <option *ngFor="let conversaoDe of temperatura" [value]="conversao.id">{{ conversao.nome }}</option>
+      <option *ngFor="let conversaoDe of temperatura" [value]="conversaoDe.id">{{ conversaoDe.nome }}</option>
     </select>
     <select id="selectTo" formControlName="tipoConversaoPara">
       <option *ngFor="let conversaoPara of temperatura" [value]="conversaoPara.id">{{ conversaoPara.nome }}></option>
@@ -23,39 +23,6 @@
     <input type="number" formControlName="valor">
   </div>
 
-  <p>Resultado: {{ resultado }}</p>
-
-
-    <!-- <div class="calc">
-      <h4>Operação:</h4>
-      <select formControlName="operacao">
-        <option *ngFor="let operacao of operacoes" [value]="operacao.id">
-          {{ operacao.nome }}
-        </option>
-      </select>
-      <label>Primeiro Número:</label>
-      <input formControlName="num1" type="number" />
-      <label>Segundo Número:</label>
-      <input formControlName="num2" type="number" /> -->
-      <!-- <button (click)="calcular()">Resultado</button> -->
-    <!-- </div> -->
-    <!-- Conversor de temperatura -->
-    <!-- <div class="temperatura">
-      <h4>Conversor de Temperatura</h4>
-      <select formControlName="selectFrom">
-        <option *ngFor="let temp of temperatura" [value]="temp.id">
-          {{ temp.nome }}
-        </option>
-      </select>
-      <p>Para</p>
-      <select formControlName="selectTo">
-        <option *ngFor="let temp of temperatura" [value]="temp.id">
-          {{ temp.nome }}
-        </option>
-      </select>
-      <p>Valor: <input formControlName="valor" /></p> -->
-      <!-- <button (click)="converterTemperatura()">Converter Temperatura</button> -->
-    <!-- </div>
-    <button (click)="clearAll()">Limpar Tudo</button> -->
+  <!-- <p>Resultado: {{ resultado }}</p> -->
   </form>
   

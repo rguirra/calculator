@@ -1,3 +1,3 @@
-<calculadora-dumb></calculadora-dumb>
-<button (click)="clearAll()"></button>
-<button (click)="calcular()"></button>
+<calculadora-dumb [calculadora]="calculadora" [operacoes]="operacao" [temperatura]="temperatura"></calculadora-dumb>
+<button (click)="clearAll()">Limpar</button>
+<button (click)="calcular()">Calcular</button>

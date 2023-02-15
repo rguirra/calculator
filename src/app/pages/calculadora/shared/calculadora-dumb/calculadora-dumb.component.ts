@@ -6,10 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './calculadora-dumb.component.html',
 })
 export class CalculadoraDumbComponent {
-  @Input() calculadora = [];
-  @Input() operacoes = [];
-  @Input() temperatura = [];
-  @Input() resultado!: number;
+  @Input() calculadora: any;
+  @Input() operacoes: any;
+  @Input() temperatura: any;
 
   form: FormGroup;
 
