@@ -108,12 +108,4 @@ export class CalculadoraRenderComponent {
       }
     }
   }
-
-  clearAll() {
-    this.operacao = 0;
-    this.num1 = 0;
-    this.num2 = 0;
-    this.selectFrom = 0;
-    this.selectTo = 0;
-  }
 }

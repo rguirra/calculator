@@ -1,28 +1,30 @@
 <form name="form" [formGroup]="form">
   <select formControlName="tipoCalculadora">
-    <option *ngFor="let calc of calculadora">{{ calculadora.nome }}</option>
+    <option *ngFor="let calc of calculadora">{{ calc?.nome }}</option>
   </select>
-
-  <div *ngIf="calculadora === 1">
+  
+  <div *ngIf="calculadora === 'simples'">
     <select id="operacao" formControlName="operacao">
-      <option *ngFor="let operacao of operacoes" [value]="operacao.id">{{ operacao.nome }}</option>
+      <option *ngFor="let operacao of operacoes">{{ operacao?.nome }}</option>
     </select>
-
+    
     <input id="num1" type="number" formControlName="num1">
     <input id="num2" type="number" formArrayName="num2">
   </div>
-
-  <div *ngIf="calculadora === 2">
+  
+  <div *ngIf="calculadora == 'temperatura'">
     <select id="selectFrom" formControlName="tipoConversao">
-      <option *ngFor="let conversaoDe of temperatura" [value]="conversaoDe.id">{{ conversaoDe.nome }}</option>
+      <option *ngFor="let conversaoDe of temperatura">{{ conversaoDe?.nome }}</option>
     </select>
     <select id="selectTo" formControlName="tipoConversaoPara">
-      <option *ngFor="let conversaoPara of temperatura" [value]="conversaoPara.id">{{ conversaoPara.nome }}></option>
+      <option *ngFor="let conversaoPara of temperatura">{{ conversaoPara?.nome }}></option>
     </select>
-
+    
     <input type="number" formControlName="valor">
   </div>
-
-  <!-- <p>Resultado: {{ resultado }}</p> -->
-  </form>
   
+  <!-- <p>Resultado: {{ resultado }}</p> -->
+
+  <button (click)="clearAll()" style="margin-top: 20px; display: flex;">Limpar</button>
+
+</form>

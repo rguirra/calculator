@@ -14,11 +14,17 @@ export class CalculadoraDumbComponent {
 
   constructor(public formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
+      tipoCalculadora: [null, Validators.required],
       operacao: [null, Validators.required],
       num1: [null, [Validators.required, Validators.max(100)]],
       num2: [null, [Validators.required, Validators.max(100)]],
-      selectFrom: [null, Validators.required],
-      selectTo: [null, Validators.required],
-    })
-   }
+      tipoConversao: [null, Validators.required],
+      tipoConversaoPara: [null, Validators.required],
+      valor: [null, Validators.required],
+    });
+   };
+
+   clearAll() {
+    this.form.updateValueAndValidity;
+  };
 }
