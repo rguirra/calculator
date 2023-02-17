@@ -3,8 +3,8 @@
     <option *ngFor="let calc of calculadora">{{ calc?.nome }}</option>
   </select>
   
-  <div *ngIf="calculadora === 'simples'">
-    <select id="operacao" formControlName="operacao">
+  <div>
+    <select formControlName="operacao">
       <option *ngFor="let operacao of operacoes">{{ operacao?.nome }}</option>
     </select>
     
@@ -12,7 +12,7 @@
     <input id="num2" type="number" formArrayName="num2">
   </div>
   
-  <div *ngIf="calculadora == 'temperatura'">
+  <div>
     <select id="selectFrom" formControlName="tipoConversao">
       <option *ngFor="let conversaoDe of temperatura">{{ conversaoDe?.nome }}</option>
     </select>
